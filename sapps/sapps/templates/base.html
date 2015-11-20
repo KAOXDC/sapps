@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title> {% block title %} Bienvenidos {% endblock %} </title>
+
+	<link rel="stylesheet" type="text/css" href="/media/materialize/css/materialize.min.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+   
+</head>
+<body class="grey darken-3">
+	<script type="text/javascript" src="/media/js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="/media/materialize/js/materialize.min.js"></script>
+
+	<nav class="amber darken-4">
+		<div class="nav-wrapper">
+			<a href="/" class="brand-logo">Logo</a>
+			<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+			<ul class="right hide-on-med-and-down">
+				<li><a href="{% url 'vista_juegos' %}">Juegos</a></li>
+				<li><a href="{% url 'vista_aplicaciones' %}">Applicaciones</a></li>
+				{% if user.is_authenticated and user.is_staff %}
+					<li><a href="{% url 'vista_principal' %}">Mis Apps</a></li>
+				{% endif %}
+
+				{% if user.is_authenticated %}
+					<li><a href="{% url 'vista_logout' %}"> Logout </a></li>
+				{% else %}
+					<li><a href="{% url 'vista_register' %}">Registrarse</a></li>
+					<li><a href="{% url 'vista_login' %}"> Login </a></li>
+				{% endif %}	
+			</ul>
+			<ul class="side-nav" id="mobile-demo">
+				<li><a href="{% url 'vista_juegos' %}">Juegos</a></li>
+				<li><a href="{% url 'vista_aplicaciones' %}">Aplicaciones</a></li>
+				{% if user.is_authenticated and user.is_staff %}
+					<li><a href="{% url 'vista_principal' %}">Mis Apps</a></li>
+				{% endif %}
+				{% if user.is_authenticated %}
+					<li><a href="{% url 'vista_logout' %}"> Logout </a></li>
+				{% else %}
+					<li><a href="{% url 'vista_register' %}">Registrarse</a></li>
+					<li><a href="{% url 'vista_login' %}"> Login </a></li>
+				{% endif %}				</ul>
+		</div>
+	</nav>
+
+	<div class="parallax-container">
+		<div class="parallax"><img src="/media/images/parallax1.jpg"></div>
+	</div>
+
+
+
+	<div class="container">
+
+
+    <div class="row">
+		<div class="col s12 m12  l9 "> <!-- Note that "m8 l9" was added -->
+					<p class="z-depth-1">
+					</b>
+			<div class="z-depth-2 col s12 m12  l12  grey lighten-2"> <!-- Note that "m8 l9" was added -->
+				<span class="flow-text" >  </span>
+						{% block content %}
+						{% endblock %}
+
+		</div>
+
+		</div>
+
+		<div class="col s12 m12 l3 "> <!-- Note that "m8 l9" was added -->
+								<p class="z-depth-1">
+					</b>
+			<div class="z-depth-2 col s12 m12 l12 grey lighten-2"> <!-- Note that "m4 l3" was added -->
+			
+			<div id="introduction" class="section scrollspy">
+				<h4>Categorias</h4>
+				<p class="caption">Seleccione la Categoria que desee</p>
+				<ul class="tabs tab-demo z-depth-1 black" style="width: 100%;">
+				<li class="tab col s3"><a href="#test1" class="active">Aplicaciones</a></li>
+				<li class="tab col s3"><a class="" href="#test2">Juegos</a></li>
+				<div class="indicator" style="right: 786px; left: 0px;"></div></ul>
+				<div id="test1" class="col s12 white" style="display: block;">
+					{% block cat_app %}
+						
+					{% endblock  %}
+					<p>negocios</p>
+				</div>
+				<div id="test2" class="col s12 white" style="display: none;">
+					{% block cat_game %}
+						
+					{% endblock  %}
+					<p>accion</p>
+				</div>
+				<br>
+			</div>
+
+			<br>
+			<div class="alert alert-info">
+				<h5>Sena Mas Trabajo</h5>  
+				<p><b>Direccion </b> : Cra Sena  Alto Cauca</p>
+				<p><b>Telefono</b> : </p>
+				<p>314 690 6848</p>
+				<p>Popayan - Cauca</p>
+			</div>
+			<div align="center">
+				<img src="/media/images/django.gif" >
+			</div>
+
+
+
+			</div>
+		</div>
+
+    </div>
+
+	</div>
+        <footer class="page-footer amber darken-3">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">Sena Apps</h5>
+                <p class="grey-text text-lighten-4">Portal Aplicaciones y juegos  para  telefonos moviles de los aprendices sena  para toda colombia.</p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                  <li><a class="grey-text text-lighten-3" href="#!">Contacto</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Politicas</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            © 2015 Copyright Sena CTPI CAUCA
+            <a class="grey-text text-lighten-4 right" href="http://www.SenaSofiaPlus.edu.co">SenaSofiaPlus.edu.co</a>
+            </div>
+          </div>
+        </footer>
+
+
+
+<script>
+	$(document).ready(function(){
+		//$('select').material_select();
+		
+		$('select').not('.disabled').material_select();
+		//$('select:not([multiple])').material_select();
+		$(".button-collapse").sideNav();
+		$('.modal-trigger').leanModal();
+		$('ul.tabs').tabs();
+		$('ul.tabs').tabs('select_tab', 'tab_id');
+		$('.datepicker').pickadate({
+		    selectMonths: true, // Creates a dropdown to control month
+		    selectYears: 15 // Creates a dropdown of 15 years to control year
+		  });
+			});
+		$('.parallax').parallax();
+
+</script>
+</body>
+
+</html>
+

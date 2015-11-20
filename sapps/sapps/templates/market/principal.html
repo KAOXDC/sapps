@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	Aplicaciones Sena
+{% endblock %}
+
+{% block content %}
+	<h4> {{ tipo }}</h4>
+	<br>
+	<hr>
+	{% load humanize %}
+	<div class="row z-depth-1 grey lighten-2">
+		{% for a in apps %}
+			<div class="col s12 m4 l2">
+				<div align="center" class="col s4 m6 l12 white z-depth-1">
+					<p>
+						<a href="/app/{{a.id}}">
+						<img class="responsive-img" src="/media/{{a.icono}}">
+						</a>
+					</p>
+					<p>
+						<a href="/app/{{a.id}}">{{a.titulo|title|truncatechars:12}}</a>
+					</p>
+					<div align="center">
+						<a class="waves-effect waves-light btn-floating modal-trigger orange" href="/app/{{a.id}}"><i class="material-icons">search</i></a>
+					</div>
+					<br>
+				</div>	
+			</div>
+		{% endfor %}
+	</div>
+
+<br>
+<hr>
+	<a href="/">Mas  Aplicaciones </a>
+{% endblock %}
+
+{% block cat_app %}
+	{% for a in apps %}
+				
+			{% if a.categoria.tipo == 'Aplicacion' %}
+		<p>
+				{{ a.categoria }}
+		</p>
+			{% endif %}
+	{% endfor %}
+{% endblock %}
+
+{% block cat_game %}
+	{% for a in apps %}
+			{% if a.categoria.tipo.nombre == 'Juego' and a.categoria.tipo.nombre != 'Aplicacion' %}
+		<p>
+				{{ a.categoria }}
+		</p>
+			{% endif %}
+	{% endfor %}
+{% endblock %}
